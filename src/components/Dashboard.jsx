@@ -1,4 +1,4 @@
-import {Button,Container,Form,Modal} from 'react-bootstrap';
+import {Button,Container,Form, Modal, Accordion, Row, Col, ListGroup} from 'react-bootstrap';
 import { useState } from 'react';
 
 
@@ -185,6 +185,26 @@ const handleImage = (e) => setBlogImage(e.target.value)
       
         
             <Button variant="outline-primary" onClick={handleShow}>Edit Blog Item</Button>
+
+            <Row>
+              <Col>
+
+              <Accordion defaultActiveKey={['0']} alwaysOpen>
+      <Accordion.Item eventKey="0">
+        <Accordion.Header>Accordion Item #1</Accordion.Header>
+        <Accordion.Body style={{backgroundColor: "#3f3f3f", color: "azure"}}>
+          {blogItems.map((item) => item.Published ? <ListGroup>{item.Title}</ListGroup> : null)}
+        </Accordion.Body>
+      </Accordion.Item>
+      <Accordion.Item eventKey="1">
+        <Accordion.Header>Accordion Item #2</Accordion.Header>
+        <Accordion.Body tyle={{backgroundColor: "#3f3f3f", color: "azure"}}>
+        {blogItems.map((item) => !item.Published ? <ListGroup>{item.Title}</ListGroup> : null)}
+        </Accordion.Body>
+      </Accordion.Item>
+    </Accordion>
+              </Col>
+            </Row>
         
       </Container>
     </>
