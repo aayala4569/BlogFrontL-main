@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Dashboard from './components/Dashboard';
 import {Container, Row, Col } from 'react-bootstrap';
 import BlogPage from './components/BlogPage';
+import CreateAccount from './components/CreateAccount';
 
 
 function App() {
@@ -14,7 +15,8 @@ function App() {
         <Col>
         <h1 className='text-center'>Our Blog</h1>
         </Col>
-        <BlogPage/>
+        <CreateAccount/>
+        {/* <BlogPage/> */}
         {/* <Dashboard/> */}
       </Row>
     </Container>
