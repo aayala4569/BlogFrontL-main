@@ -189,17 +189,30 @@ const handleImage = (e) => setBlogImage(e.target.value)
             <Row>
               <Col>
 
-              <Accordion defaultActiveKey={['0']} alwaysOpen>
+              <Accordion defaultActiveKey={['0', '1']} alwaysOpen>
       <Accordion.Item eventKey="0">
-        <Accordion.Header>Accordion Item #1</Accordion.Header>
+        <Accordion.Header>Published</Accordion.Header>
         <Accordion.Body style={{backgroundColor: "#3f3f3f", color: "azure"}}>
-          {blogItems.map((item) => item.Published ? <ListGroup>{item.Title}</ListGroup> : null)}
+          {blogItems.map((item) => item.Published ? <ListGroup key={item.Title}>{item.Title}
+           <Col className="d-flex justify-content-end">
+          <Button variant="outline-danger mx-2">Deltete</Button>
+          <Button variant="outline-info mx-2">Edit</Button>
+          <Button variant="outline-primary mx-2">Publish</Button>
+            </Col>
+          </ListGroup> : null)}
+         
         </Accordion.Body>
       </Accordion.Item>
       <Accordion.Item eventKey="1">
-        <Accordion.Header>Accordion Item #2</Accordion.Header>
+        <Accordion.Header>Unpublished</Accordion.Header>
         <Accordion.Body tyle={{backgroundColor: "#3f3f3f", color: "azure"}}>
-        {blogItems.map((item) => !item.Published ? <ListGroup>{item.Title}</ListGroup> : null)}
+        {blogItems.map((item) => !item.Published ? <ListGroup key={item.Title}>{item.Title}
+        <Col className="d-flex justify-content-end">
+          <Button variant="outline-danger mx-2">Deltete</Button>
+          <Button variant="outline-info mx-2">Edit</Button>
+          <Button variant="outline-primary mx-2">Unpublish</Button>
+            </Col>
+            </ListGroup> : null)}
         </Accordion.Body>
       </Accordion.Item>
     </Accordion>
