@@ -1,25 +1,43 @@
 import './App.css'
-import Button from 'react-bootstrap/Button';
 import Dashboard from './components/Dashboard';
 import {Container, Row, Col } from 'react-bootstrap';
 import BlogPage from './components/BlogPage';
 import CreateAccount from './components/CreateAccount';
+import Login from './components/Login';
+import {BrowserRouter, Routes, Route} from "react-router-dom";
+import NavBar from './components/NavBar';
 
 
 function App() {
  
-
   return (
-    <Container>
+
+ <BrowserRouter>
+
+  <Container>
       <Row>
         <Col>
         <h1 className='text-center'>Our Blog</h1>
         </Col>
-        <CreateAccount/>
+        <NavBar/>
+        {/* <Login/> */}
+        {/* <CreateAccount/> */}
         {/* <BlogPage/> */}
         {/* <Dashboard/> */}
+
+        <Routes>
+          <Route path="/" element={<BlogPage/>}/>
+          <Route path="/Login" element={<Login/>}/>
+          <Route path="/CreateAccount" element={<CreateAccount/>}/>
+          <Route path="/DashBoard" element={<Dashboard/>}/>
+        </Routes>
+
+
       </Row>
     </Container>
+
+  </BrowserRouter>
+    
   )
 }
 

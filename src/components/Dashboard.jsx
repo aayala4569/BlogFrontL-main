@@ -1,9 +1,27 @@
 import {Button,Container,Form, Modal, Accordion, Row, Col, ListGroup} from 'react-bootstrap';
-import { useState } from 'react';
+import { useState, useEffect} from 'react';
+import { useNavigate } from 'react-router-dom';
+import { checkToken } from '../Services/DataService';
+
 
 
 
 const Dashboard = () => {
+
+  let navigate = useNavigate();
+
+  useEffect(() => {
+//A useEffect is the first thing that fires on load.
+//Put any logic we want to fire on load
+//in the event that there is a change in our dependency, it will fire again
+//always have a dependency [] or you will be in an infinite loop
+
+    if(!checkToken()) 
+    {
+      navigate("/Login")
+    }
+
+  }, [])
 
 //functions
 const handleSetTitle = (e) => setBlogTitle(e.target.value)
