@@ -38,4 +38,33 @@ const createAccount = async (createdUser) =>
 
 }
 
-export {checkToken, createAccount}
+const login = async (loginUser) =>
+{
+    let result = await fetch("http://localhost:5101/user/Login", {
+        method: "POST",
+        //headers is an objects with a key value
+        headers: {
+            "Content-Type" : 'application/json'
+        },
+        //In parenthesis, has to be named the same as above
+        body: JSON.stringify(loginUser)
+    });
+
+    if(!result.ok)
+    {
+        const message = `An error has occured! ${result.status}`
+        throw new Error(message)
+    }
+    let data = await result.json();
+
+   
+
+    if(data.token != null)
+    {
+        localStorage.setItem("Token", data.token)
+    }
+ console.log(data);
+ return data;
+}
+
+export {checkToken, createAccount, login}
