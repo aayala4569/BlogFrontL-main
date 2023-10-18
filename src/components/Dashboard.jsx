@@ -1,7 +1,7 @@
 import {Button,Container,Form, Modal, Accordion, Row, Col, ListGroup} from 'react-bootstrap';
 import { useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
-import { checkToken } from '../Services/DataService';
+import { checkToken, LoggedInData } from '../Services/DataService';
 
 
 
@@ -20,15 +20,17 @@ const Dashboard = () => {
     {
       navigate("/Login")
     }
+   let userInfo = LoggedInData();
+   console.log(userInfo);
 
-  }, [])
+  }, [])}
 
 //functions
 const handleSetTitle = (e) => setBlogTitle(e.target.value)
 const handleSetDescription = (e) => setBlogDescription(e.target.value)
 const handleTags = (e) => setBlogTags(e.target.value)
 const handleCategory = (e) => setBlogCategory(e.target.value)
-const handleImage = (e) => setBlogImage(e.target.value)
+// const handleImage = (e) => setBlogImage(e.target.value)
   const handleClose = () => setShow(false);
   const handleShow = (e) => {
     setShow(true);
@@ -61,6 +63,57 @@ const handleImage = (e) => setBlogImage(e.target.value)
   //bools
   const [show, setShow] = useState(false);
   const [edit, setEdit] = useState(false);
+
+  const handleSaveWithPublish = () =>
+  {
+    let {publishername, userId} = LoggedInData();
+    const Published = {
+      Id: 0,
+      IserId: 0,
+      Publishername: "",
+      Title: "",
+      Image: "", 
+      Description: "",
+      Date: "",
+      Category: "",
+      Tag: "",
+      IsDeleted: false,
+      IsPublished: true
+
+    }
+  const handleSaveWithUnpublish = () =>
+  {
+    let {publishername, userId} = LoggedInData();
+    const notPublished = {
+      Id: 0,
+      IserId: 0,
+      Publishername: "",
+      Title: "",
+      Image: "", 
+      Description: "",
+      Date: "",
+      Category: "",
+      Tag: "",
+      IsDeleted: false,
+      IsPublished: false
+
+    }
+    console.log(notPublished)
+    handleClose();
+  }
+
+  //handle our image
+  const handleImage = async (e) =>
+  {
+    let file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onloadend = () =>
+    {
+    console.log(reader.result);
+
+    }
+  reader.readAsDataURL(file);
+  }
 
   const [blogItems, setBlogItems] = useState([
     {
